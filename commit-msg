@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# 0是正常状态 1是异常状态
+
+# header: feat(Ladybug5+): support send realtime image
+
+# 理想状态下应该使用这个正则表达式匹配Header，但是bash不识别(?:)这个
+# non-capturing group 所以会匹配到一个带括号的scope.
+
+# regex="^(\w+)(?:\(([^\)\s]+)\))?: (.+)"
+# group1=feat
+# group2=Ladybug5+
+# group3=support send realtime image
+
+regex="^(\w+)(\(([^\)[:space:]]+)\))?: (.+)";
+# group1=feat
+# group2=(Ladybug5+)
+# group3=Ladybug5+
+# group4=support send realtime image
+
+types=("feat" "fix" "docs" "style" "refactor" "test" "chore" "SIT");
+headFlag=false;
+
+tempFile=`mktemp`
+while read line;
+do
+    if [ "${line:0:1}" != "#" ]; then
+        echo $line >> $tempFile;
+    fi
+done<$1;
+
+headline=$(awk 'NR==1 {print}' $tempFile);
+if [ ${#headline} -gt 72 ]; then
+    echo -e "\033[0;31mError Header:\033[0m \"$headline\" (${#headline})"
+    echo -e "Header line size is greater than \033[0;31m72\033[0m characters.";
+    echo "Your commit file save in $tempFile, you can use -F to use the file."
+    exit 1;
+else
+    if [[ $headline =~ $regex ]]; then
+        _type="${BASH_REMATCH[1]}"
+        for __type in ${types[@]}
+        do
+            if [[ $__type = $_type ]]; then
+                headFlag=true;
+            fi
+        done
+        if [[ $headFlag == false ]]; then
+            echo -e "\033[0;31mError Type!\033[0m $headline"
+            echo -e "Header line type only supports \033[0;31m\"${types[@]}\"\033[0m"
+            echo "Your commit file save in $tempFile, you can use -F to use the file."
+            exit 1;
+        fi
+
+        _scope="${BASH_REMATCH[3]}"
+        _subject="${BASH_REMATCH[4]}"
+        if [ ${#_subject} -gt 50 ]; then
+            echo -e "\033[0;31mError Subject:\033[0m \"$_subject\" (${#_subject})"
+            echo -e "Subject field size is greater than \033[0;31m50\033[0m characters."
+            echo "Your commit file save in $tempFile, you can use -F to use the file."
+            exit 1;
+        fi
+    else
+        echo -e "\033[0;31mError Header:\033[0m \"$headline\""
+        echo -e "Does not match \033[0;31m\"<type>(<scope>): <subject>\"\033[0m";
+        echo "Your commit file save in $tempFile, you can use -F to use the file."
+        exit 1;
+    fi
+fi
+
+blankline=$(awk 'NR==2 {print}' $tempFile);
+if [ ${#blankline} -gt 0 ]; then
+    echo -e "\033[0;31mAt least one blank line\033[0m is required between header and bady."
+    echo "Your commit file save in $tempFile, you can use git commit -F $tempFile to use the file."
+    exit 1;
+fi
+exit 0;

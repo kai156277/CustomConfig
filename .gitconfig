@@ -1,0 +1,7 @@
+[alias]
+    oneline = log --pretty=format:'%C(red)%h%Creset|%C(yellow)%cd%Creset|%s|%C(green)%d%Creset' --date=format:%F/%T
+[user]
+	email = 1005324930@qq.com
+	name = zhaokai
+[core]
+	editor = vim
