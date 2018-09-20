@@ -21,7 +21,7 @@ filetype plugin on
 " vim 自身（非插件）快捷键
 
 " 定义快捷键到行首和行尾
-nmap LB 0
+nmap LB ^
 nmap LE $
 
 " 设置快捷键将选中文本块复制至系统剪贴板
