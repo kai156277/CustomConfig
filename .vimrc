@@ -48,6 +48,10 @@
     " 去掉搜索高亮
     noremap <silent> <Leader>/ :nohls<CR>
 
+    " buffer 切换
+    noremap <C-TAB> :bnext<CR>
+    noremap <C-S-TAB> :bprevious<CR>
+
     " python run {
 		
         function PythonRun()
@@ -171,12 +175,7 @@
     filetype plugin indent on
 
     " colorscheme { 
-        if !WINDOWS()
-            let g:solarized_termtrans=1
-            colorscheme solarized             " Load a colorscheme
-        else
-            colorscheme onedark
-        endif
+        colorscheme onedark
     " }
 
     " vim-powerline {
@@ -229,8 +228,10 @@
 
     " MiniBufExpl {
         let g:miniBufExplorerAutoStart = 1
-        noremap <C-TAB>   :MBEbn<CR>
-        noremap <C-S-TAB> :MBEbp<CR>
+        map <F3> :MBEToggle<CR>
+        " :MBEbn 不能循环遍历列表还是使用 :bn比较好
+        " noremap <C-TAB>   :MBEbn<CR>
+        " noremap <C-S-TAB> :MBEbp<CR>
     " }
 
     " NERDTree {
