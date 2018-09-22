@@ -163,6 +163,7 @@
     Plugin 'fholgado/minibufexpl.vim'
     Plugin 'Shougo/neocomplete.vim'
     Plugin 'scrooloose/nerdcommenter'
+    Plugin 'davidhalter/jedi-vim'
     " Plugin 'Valloric/YouCompleteMe'
 
     " 插件列表结束
@@ -242,6 +243,11 @@
         let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
         " 窗口大小
         let NERDTreeWinSize=25
+    " }
+
+    " jedi-vim {
+
+    let g:jedi#use_splits_not_buffers = "right"
     " }
 " }
 
