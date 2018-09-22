@@ -48,6 +48,42 @@
     " 去掉搜索高亮
     noremap <silent> <Leader>/ :nohls<CR>
 
+    " python run {
+		
+        function WinPythonRun()
+            let mp = &makeprg 
+            let ef = &errorformat 
+            let exeFile = expand("%:t") 
+            setlocal makeprg=python\ -u  
+            set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m 
+            silent make %
+            copen 
+            "  set efm 是设置quickfix的errorformat，以便vim识别  
+            "  makeprg 是vim内置的编译命令，可以通过更改来实现编译对应类型文件。具体可参考vim官方说明文件。
+            "  copen是打开quickfix，n用来设置quichfix窗口大小，如 cope5。在错误描述上回车，可以直接跳转到错误行。
+            let &makeprg     = mp  
+            let &errorformat = ef  
+        endfunction
+
+        function LinuxPythonRun()
+            exec "w"
+            if &filetype == 'python'
+                        exec "!python -u %"
+            elseif &filetype == 'sh'
+                        :!time bash %
+            elseif &filetype == 'python'
+            elseif &filetype == 'html'
+                        exec "!firefox % &"
+        endfunction
+
+        if !WINDOWS()
+            au filetype python map <F5> :w<CR>:call LinuxPythonRun()<CR>
+        else
+            au filetype python map <F5> :w<CR>:call WinPythonRun()<CR>
+        endif
+
+    " }
+
 " }
 
 " General {
@@ -104,6 +140,7 @@
     set wildmenu                    " Show list instead of just completing
     set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
     set foldmethod=indent
+	set nofoldenable
 
 " }
 
@@ -116,6 +153,7 @@
     set tabstop=4                   " An indentation every four columns
     set softtabstop=4               " Let backspace delete indent
     set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
+	au filetype quickfix set wrap
 
 " }
 
@@ -123,7 +161,11 @@
     set encoding=utf-8
     set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
     set helplang=cn
-    set langmenu=zh_CN.UTF-8
+    if WINDOWS()
+        set langmenu=zh_CN.UTF-8
+        source $VIMRUNTIME/delmenu.vim
+        source $VIMRUNTIME/menu.vim
+    endif
     set termencoding=utf-8
 " }
 
