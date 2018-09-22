@@ -50,37 +50,14 @@
 
     " python run {
 		
-        function WinPythonRun()
-            let mp = &makeprg 
-            let ef = &errorformat 
-            let exeFile = expand("%:t") 
+        function PythonRun()
             setlocal makeprg=python\ -u  
             set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m 
             silent make %
-            copen 
-            "  set efm 是设置quickfix的errorformat，以便vim识别  
-            "  makeprg 是vim内置的编译命令，可以通过更改来实现编译对应类型文件。具体可参考vim官方说明文件。
-            "  copen是打开quickfix，n用来设置quichfix窗口大小，如 cope5。在错误描述上回车，可以直接跳转到错误行。
-            let &makeprg     = mp  
-            let &errorformat = ef  
+            copen
         endfunction
 
-        function LinuxPythonRun()
-            exec "w"
-            if &filetype == 'python'
-                        exec "!python -u %"
-            elseif &filetype == 'sh'
-                        :!time bash %
-            elseif &filetype == 'python'
-            elseif &filetype == 'html'
-                        exec "!firefox % &"
-        endfunction
-
-        if !WINDOWS()
-            au filetype python map <F5> :w<CR>:call LinuxPythonRun()<CR>
-        else
-            au filetype python map <F5> :w<CR>:call WinPythonRun()<CR>
-        endif
+        au filetype python map <F5> :w<CR>:call PythonRun()<CR>
 
     " }
 
@@ -153,7 +130,6 @@
     set tabstop=4                   " An indentation every four columns
     set softtabstop=4               " Let backspace delete indent
     set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
-	au filetype quickfix set wrap
 
 " }
 
@@ -187,7 +163,7 @@
     Plugin 'fholgado/minibufexpl.vim'
     Plugin 'Shougo/neocomplete.vim'
     Plugin 'scrooloose/nerdcommenter'
-    Plugin 'Valloric/YouCompleteMe'
+    " Plugin 'Valloric/YouCompleteMe'
 
     " 插件列表结束
     call vundle#end()
