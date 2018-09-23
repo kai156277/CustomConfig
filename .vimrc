@@ -52,6 +52,11 @@
     noremap <C-TAB> :bnext<CR>
     noremap <C-S-TAB> :bprevious<CR>
 
+    " 在命令行中回溯命令时，避免使用光标键。默认情况下<C-p>和<C-n>是不会过滤命令的
+    " 所以在这里映射至<Up>和<Down>
+    cnoremap <C-p> <Up>
+    cnoremap <C-n> <Down>
+
     " python run {
 		
         function PythonRun()
@@ -119,6 +124,7 @@
     set hlsearch                    " Highlight search terms
     set winminheight=0              " Windows can be 0 line high
     set wildmenu                    " Show list instead of just completing
+    set wildmode=full
     set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
     set foldmethod=indent
 	set nofoldenable
