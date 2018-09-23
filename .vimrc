@@ -128,6 +128,11 @@
     set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
     set foldmethod=indent
 	set nofoldenable
+    " 禁止显示工具条
+    set guioptions-=l
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=R
 
 " }
 
@@ -173,7 +178,7 @@
     Plugin 'fholgado/minibufexpl.vim'
     Plugin 'Shougo/neocomplete.vim'
     Plugin 'scrooloose/nerdcommenter'
-    Plugin 'davidhalter/jedi-vim'
+    "Plugin 'davidhalter/jedi-vim'
     " Plugin 'Valloric/YouCompleteMe'
 
     " 插件列表结束
@@ -185,7 +190,7 @@
     " }
 
     " vim-powerline {
-        let g:Powerline_stl_path_style = 'full'
+        let g:Powerline_stl_path_style = 'relative'
         let g:Powerline_colorscheme='solarized256'
     " }
 
