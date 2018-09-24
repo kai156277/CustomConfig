@@ -145,6 +145,7 @@
     set tabstop=4                   " An indentation every four columns
     set softtabstop=4               " Let backspace delete indent
     set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
+    set nrformats=                  " 设置0xx形式的数字格式为10进制"
 
 " }
 
@@ -178,7 +179,7 @@
     Plugin 'fholgado/minibufexpl.vim'
     Plugin 'Shougo/neocomplete.vim'
     Plugin 'scrooloose/nerdcommenter'
-    "Plugin 'davidhalter/jedi-vim'
+    Plugin 'davidhalter/jedi-vim'
     " Plugin 'Valloric/YouCompleteMe'
 
     " 插件列表结束
