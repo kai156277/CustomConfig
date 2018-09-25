@@ -33,7 +33,7 @@
 
 " Key (re)Mappings {
     let mapleader = ';'
-    vnoremap <Leader>y "+y 
+    vnoremap <Leader>y "+y
     nmap <Leader>p "+p
 
     noremap LB ^
@@ -49,8 +49,10 @@
     noremap <silent> <Leader>/ :nohls<CR>
 
     " buffer 切换
-    noremap <C-TAB> :bnext<CR>
-    noremap <C-S-TAB> :bprevious<CR>
+    nnoremap <Leader>b :bnext<CR>
+    nnoremap <Leader>p :bprevious<CR>
+    nnoremap <Leader>f :bfirst<CR>
+    nnoremap <Leader>l :blast<CR>
 
     " 在命令行中回溯命令时，避免使用光标键。默认情况下<C-p>和<C-n>是不会过滤命令的
     " 所以在这里映射至<Up>和<Down>
@@ -181,7 +183,12 @@
     filetype plugin indent on
 
     " colorscheme { 
+    if !WINDOWS()
+        let g:solarized_termtrans=1
+        colorscheme solarized
+    else
         colorscheme onedark
+    endif
     " }
 
     " vim-powerline {
