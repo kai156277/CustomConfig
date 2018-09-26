@@ -168,26 +168,57 @@
     call vundle#begin()
 
     Plugin 'VundleVim/Vundle.vim'
-    Plugin 'altercation/vim-colors-solarized'
-    Plugin 'joshdick/onedark.vim'
-    " Plugin 'python-mode/python-mode'
-    Plugin 'Lokaltog/vim-powerline'
-    Plugin 'Yggdroot/indentLine'
-    Plugin 'tell-k/vim-autopep8'
     Plugin 'majutsushi/tagbar'
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'fholgado/minibufexpl.vim'
-    Plugin 'Shougo/neocomplete.vim'
     Plugin 'scrooloose/nerdcommenter'
-    Plugin 'davidhalter/jedi-vim'
-    " Plugin 'Valloric/YouCompleteMe'
+    " Language only Plugin {
+        " C++ Plugin {
+            " vim-fswitch {
+                Plugin 'derekwyatt/vim-fswitch'
+            " }
+        " }
 
+        " Python Plugin {
+            " jedi-vim {
+                Plugin 'davidhalter/jedi-vim'
+            " }
+        " }
+    " }
+    
+    " UI {
+        Plugin 'Yggdroot/indentLine'
+        Plugin 'Lokaltog/vim-powerline'
+        " colorscheme { 
+            Plugin 'altercation/vim-colors-solarized'
+            Plugin 'joshdick/onedark.vim'
+        " }
+    " }
+
+    " auto-Commenter {
+        Plugin 'Shougo/neocomplete.vim'
+    " }
+
+    " Project Manager {
+        Plugin 'fholgado/minibufexpl.vim'
+        Plugin 'scrooloose/nerdtree'
+    " }
+
+    
     " 插件列表结束
     call vundle#end()
     filetype plugin indent on
+    " C++ Plugin {
+        " vim-fswitch {
+            nmap <silent> <F4> :FSHere<CR>
+        " }
+    " }
 
     " colorscheme { 
-        colorscheme onedark
+        if !WINDOWS()
+            let g:solarized_termtrans=1
+            colorscheme solarized
+        else
+            colorscheme onedark
+        endif
     " }
 
     " vim-powerline {
@@ -201,10 +232,6 @@
         let g:indentLine_enabled=1
     " }
     
-    " autopep8 {
-        let g:autopep8_disable_show_diff=1
-    " }
-
     " NeoComplete {
         let g:neocomplete#enable_at_startup = 1
         let g:neocomplete#enable_smart_case = 1
@@ -235,7 +262,7 @@
         " Enable NERDCommenterToggle to check all selected lines is commented or not 
         let g:NERDToggleCheckAllLines = 1
 
-        map <F4> <plug>NERDCommenterInvert
+        map <F6> <plug>NERDCommenterInvert
     " }
 
     " MiniBufExpl {
@@ -259,8 +286,9 @@
     " }
 
     " jedi-vim {
-
-    let g:jedi#use_splits_not_buffers = "right"
+        let g:jedi#use_splits_not_buffers = "right"
     " }
+
+
 " }
 
