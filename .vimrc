@@ -95,7 +95,7 @@
 
     set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
     set history=1000                    " Store a ton of history (default is 20)
-    set hidden                          " Allow buffer switching without saving
+    set hidden                          " 允许buffer未保存就切换
     set iskeyword-=.                    " '.' is an end of word designator
     set iskeyword-=#                    " '#' is an end of word designator
     set iskeyword-=-                    " '-' is an end of word designator
@@ -288,6 +288,14 @@
     " }
 
     " jedi-vim {
+        " jedi-vim supports the following commands:
+        " -> Completion <C-Space>
+        " -> Goto assignments <Leader>g
+        " -> Goto definitions <Leader>d
+        " -> Show Documentation/Pydoc K
+        " -> Renaming <Leader>r
+        " -> Usages <Leader>n (shows all the usges of a name)
+        " -> Open module :Pyimport os
         let g:jedi#use_splits_not_buffers = "right"
     " }
 
