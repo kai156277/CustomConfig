@@ -49,8 +49,9 @@
     noremap <silent> <Leader>/ :nohls<CR>
 
     " buffer 切换
-    nnoremap <Leader>b :bnext<CR>
-    nnoremap <Leader>p :bprevious<CR>
+    nnoremap <Leader>n :bnext<CR>
+    " 本应该使用<Leader>p的，但是和复制冲突"
+    nnoremap <Leader>b :bprevious<CR>
     nnoremap <Leader>f :bfirst<CR>
     nnoremap <Leader>l :blast<CR>
 
