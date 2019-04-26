@@ -1,0 +1,23 @@
+[core]
+	autocrlf = true
+	excludesfile = C:\\Users\\zhaokai\\Documents\\gitignore_global.txt
+	editor = "\"C:\\Program Files (x86)\\Vim\\vim81\\gvim.exe\""
+[user]
+	email = 1005324930@qq.com
+	name = SI-zhaokai
+[i18n]
+	commitencoding = utf-8
+	logoutputencoding = utf-8
+[alias]
+	oneline = log --pretty=format:'%C(red)%h%Creset|%C(green)%ad%Creset|%s %C(yellow)%d%Creset' --date=format:'%Y/%m/%d %H:%M:%S' -5
+	oneline10 = log --pretty=format:'%C(red)%h%Creset|%C(green)%ad%Creset|%s %C(yellow)%d%Creset' --date=format:'%Y/%m/%d %H:%M:%S' -10
+	oneline20 = log --pretty=format:'%C(red)%h%Creset|%C(green)%ad%Creset|%s %C(yellow)%d%Creset' --date=format:'%Y/%m/%d %H:%M:%S' -20
+	onelineAll = log --pretty=format:'%C(red)%h%Creset|%C(green)%ad%Creset|%s %C(yellow)%d%Creset' --date=format:'%Y/%m/%d %H:%M:%S'
+	last = log -1 --stat
+[commit]
+	template = C:\\Users\\zhaokai\\.git-commit-template
+[difftool "sourcetree"]
+	cmd = '' \"$LOCAL\" \"$REMOTE\"
+[mergetool "sourcetree"]
+	cmd = "'' "
+	trustExitCode = true
